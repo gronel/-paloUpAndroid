@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'realm-android'
+apply plugin: 'kotlin-kapt'
 android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -12,10 +14,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    /*  jackOptions.enabled=true*/
+        /*  jackOptions.enabled=true*/
     }
 
-   /* compileOptions{
+    /* compileOptions{
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }*/
@@ -26,16 +28,16 @@ android {
         }
     }
 
-    dataBinding{
-        enabled=true
+    dataBinding {
+        enabled = true
     }
 
     useLibrary 'org.apache.http.legacy'
     buildToolsVersion '26.0.2'
 }
 
-repositories{
-    maven{
+repositories {
+    maven {
         url "http://dl.bintray.com/lukaville/maven"
     }
     google()
@@ -43,6 +45,7 @@ repositories{
 }
 
 dependencies {
+    kapt 'com.android.databinding:compiler:2.3.1'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -55,7 +58,8 @@ dependencies {
     compile "com.android.support:design:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
     /*Begin:iconics*/
     compile 'com.mikepenz:iconics-core:2.8.1@aar'
     compile 'com.mikepenz:google-material-typeface:2.2.0.3.original@aar'
@@ -79,12 +83,9 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     /*End: Image Utility*/
 
-    /*Begin: Chart Utility*/
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
-    /*End: Chart Utility*/
 
     /*Begin: Repo and Http Utility*/
-   /* compile 'io.realm:realm-android:0.82.1'*/
+    /* compile 'io.realm:realm-android:0.82.1'*/
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     /*End: Repo and Http Utility*/
 
@@ -94,6 +95,7 @@ dependencies {
     /*RX and retrofit*/
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'io.reactivex:rxjava:1.2.7'
     compile 'io.reactivex:rxandroid:1.2.1'
 
@@ -102,7 +104,9 @@ dependencies {
     compile 'com.afollestad.material-dialogs:commons:0.9.4.7'
     compile 'com.github.gcacace:signature-pad:1.2.1'
     compile 'com.github.clans:fab:1.6.4'
-
+    compile('io.socket:socket.io-client:0.8.3') {
+        exclude group: 'org.json', module: 'json'
+    }
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-appindexing:9.8.0'
 
@@ -119,3 +123,5 @@ dependencies {
     }
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
+
+apply plugin: 'kotlin-android-extensions'

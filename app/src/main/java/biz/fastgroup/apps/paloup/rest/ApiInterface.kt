@@ -3,6 +3,7 @@ package biz.fastgroup.apps.paloup.rest
 import com.google.gson.JsonObject
 
 import biz.fastgroup.apps.paloup.models.LoginCredentials
+import biz.fastgroup.apps.paloup.models.LoginDetails
 import biz.fastgroup.apps.paloup.models.UserModel
 import retrofit2.Call
 import retrofit2.http.Body
@@ -26,6 +27,6 @@ interface ApiInterface {
 
     @POST("access/LoginUser")
     @Headers("No-Authentication: true")
-    fun LoginUser(@Body data: LoginCredentials): Observable<JsonObject>
+    fun LoginUser(@Body data: LoginCredentials): Observable<LoginDetails>
 
 }

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-        <variable name="login" type="biz.fastgroup.apps.paloup.models.LoginCredentials"/>
-    </data>
-<ScrollView
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.LoginActivity"
     android:id="@+id/scrlbg"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -35,7 +34,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
             <EditText
-                android:text="@={login.loginname}"
+                android:id="@+id/txt_username"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -49,7 +49,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText  android:text="@={login.password}"
+            <EditText
+                android:id="@+id/txt_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -64,7 +65,8 @@
             android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:textColor="@color/white"
-            android:background="@color/primary_dark"
+            android:background="@drawable/round_shape_btn"
+            android:onClick="onLogin"
             android:text="Login"/>
 
         <TextView android:id="@+id/link_signup"
@@ -77,5 +79,5 @@
 
     </LinearLayout>
 </ScrollView>
-</layout>
+
 
